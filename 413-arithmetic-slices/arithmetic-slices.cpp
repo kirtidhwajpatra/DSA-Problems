@@ -11,6 +11,7 @@ public:
                 curr++;
                 total += curr;
             } else {
+                
                 curr = 0;
             }
         }
