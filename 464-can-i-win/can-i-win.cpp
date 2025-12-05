@@ -9,6 +9,7 @@ public:
         for (int i = 1; i <= maxInt; i++) {
             int mask = 1 << (i - 1);
             if (used & mask) continue;
+
             if (!dfs(used | mask, total + i, maxInt, desiredTotal))
                 return memo[used] = true;
         }
@@ -17,7 +18,9 @@ public:
     
     bool canIWin(int maxChoosableInteger, int desiredTotal) {
         if (desiredTotal <= 0) return true;
+        
         int sum = (maxChoosableInteger * (maxChoosableInteger + 1)) / 2;
+
         if (sum < desiredTotal) return false;
         return dfs(0, 0, maxChoosableInteger, desiredTotal);
     }
