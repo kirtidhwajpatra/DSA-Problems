@@ -16,7 +16,7 @@ public:
 
             ans += (r - j + 1);
         }
-        
+
 
         inplace_merge(a.begin() + l, a.begin() + m + 1, a.begin() + r + 1);
     }
@@ -24,12 +24,16 @@ public:
     long long numberOfPairs(vector<int>& nums1, vector<int>& nums2, int diff) {
         int n = nums1.size();
 
-        vector<long long> a(n);
+           vector<long long> a(n);
 
         for (int i = 0; i < n; i++) a[i] = nums1[i] - nums2[i];
         mergeSort(a, 0, n - 1, diff);
+
         return ans;
-    }
+
+       }
+
+
 
 };
 
