@@ -7,12 +7,16 @@ public:
             vector<int> row(layer + 1, 1);
 
             for (int slot = 1; slot < layer; slot++) {
+
+                
                 row[slot] = triangle[layer - 1][slot - 1]
                           + triangle[layer - 1][slot];
             }
 
-            triangle.push_back(move(row));
+               triangle.push_back(move(row));
         }
+
+
 
         return triangle;
     }
