@@ -20,45 +20,50 @@ public:
 class Solution {
 public:
     Node* copyRandomList(Node* head) {
-        if (!head) return NULL;
-
-        if (!head->next) {
-            Node* newHead = new Node(head->val);
-            if (head->random == head)
-                newHead->random = newHead;
-            return newHead;
-        }
-
+        if(head == NULL) return NULL;
         unordered_map<Node*, Node*> mp;
 
+        Node* curr = head;
+        Node* prev = NULL;
+        Node* newhead = NULL;
 
-        Node* temp = head;
+        while(curr){
+            Node* temp = new Node(curr->val);
+            mp[curr] = temp; //storing
 
-        //
-        Node* newHead = new Node(temp->val);
-        mp[head] = newHead;
+            if(newhead == NULL){
+                newhead = temp;
+                prev = newhead;
+            } else {
+                prev->next = temp;
+                prev = temp;
+            }
 
-        Node* newTemp = newHead;
-        temp = temp->next;
-
-        while (temp) {
-            
-            Node* curr = new Node(temp->val);
-            newTemp->next = curr;
-            newTemp = curr;
-            mp[temp] = newTemp;
-            temp = temp->next;
+            curr = curr->next;
         }
+            //fill random pointers
 
-        temp = head;
-        newTemp = newHead;
+            curr = head;
+            Node* newcurr = newhead;
 
-        while (temp) {
-            newTemp->random = mp[temp->random];
-            temp = temp->next;
-            newTemp = newTemp->next;
-        }
+            while(curr) {
+                if(curr->random == NULL) {
+                    newcurr->random = NULL;
 
-        return newHead;
+                } else {
+                    newcurr->random = mp[curr->random];
+                }
+
+                curr = curr->next;
+                newcurr = newcurr->next;
+
+            }
+
+        
+
+
+        return newhead;
+
+    
     }
 };
