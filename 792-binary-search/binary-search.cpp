@@ -7,15 +7,14 @@ public:
         int mid = 0;
 
         while(start<=end){
-            mid = start + (end - start) / 2;
+            mid = start+(end-start)/2;
 
-            if(target == nums[mid]) return mid;
+            if(nums[mid] == target) return mid;
             else if(target<nums[mid]){
                 end = mid-1;
-            }else {
-                start = mid+1;
+            } else {
+                start = mid + 1;
             }
-        
         }
 
         return -1;
