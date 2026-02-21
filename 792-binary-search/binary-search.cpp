@@ -1,24 +1,24 @@
 class Solution {
 public:
-    //helper
-    int binSearch(vector<int>& nums, int target, int st, int end){
-        if(st <= end) {
-            int mid = st + (end-st)/2;
-
-            if(nums[mid] == target){
-                return mid;
-            } else if(nums[mid]<= target){
-                return binSearch(nums, target, st=mid+1, end);
-            } else {
-                return binSearch(nums, target, st, end= mid-1);
-            }
-        }
-        return -1;
-    }
-
-
     int search(vector<int>& nums, int target) {
-        return binSearch(nums, target, 0, nums.size()-1);
+
+        int start = 0;
+        int end = nums.size()-1;
+        int mid = 0;
+
+        while(start<=end){
+            mid = start + (end - start) / 2;
+
+            if(target == nums[mid]) return mid;
+            else if(target<nums[mid]){
+                end = mid-1;
+            }else {
+                start = mid+1;
+            }
+        
+        }
+
+        return -1;
         
     }
 };
