@@ -1,43 +1,46 @@
 class Solution {
 public:
+    int findfirst(vector<int>& nums, int target){
+        int start = 0, end = nums.size()-1;
+        int ans = -1;
+
+        while(start<=end){
+            int mid = start+(end-start)/2;
+            if(nums[mid]==target){
+                ans = mid;
+                end = mid-1; //to find the left target
+            } else if(nums[mid]<target){
+                start=mid+1;
+            } else {
+                end=mid-1;
+            }
+        }
+        return ans;
+    }
+
+    int findlast(vector<int>& nums, int target){
+        int start = 0, end = nums.size()-1;
+        int ans = -1;
+
+        while(start<=end){
+            int mid= start+(end-start)/2;
+            if(nums[mid]==target){
+                ans = mid;
+                start = mid+1; //to find the right target
+            } else if(nums[mid]<target){
+                start=mid+1;
+            } else {
+                end=mid-1;
+            }
+        }
+        
+        return ans;
+    }
+
     vector<int> searchRange(vector<int>& nums, int target) {
-        int first = findFirst(nums, target);
-        int last = findLast(nums, target);
-        return {first, last};
-    }
+        int leftAnswer = findfirst(nums, target);
+        int rightAnswer = findlast(nums, target);
 
-private:
-    int findFirst(vector<int>& nums, int target) {
-        int left = 0, right = nums.size() - 1;
-        int first = -1;
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            if (nums[mid] == target) {
-                first = mid;
-                right = mid - 1;  // keep searching left
-            } else if (nums[mid] < target) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
-        }
-        return first;
-    }
-
-    int findLast(vector<int>& nums, int target) {
-        int left = 0, right = nums.size() - 1;
-        int last = -1;
-        while (left <= right) {
-            int mid = left + (right - left) / 2;
-            if (nums[mid] == target) {
-                last = mid;
-                left = mid + 1;  // keep searching right
-            } else if (nums[mid] < target) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
-        }
-        return last;
+        return {leftAnswer, rightAnswer};
     }
 };
