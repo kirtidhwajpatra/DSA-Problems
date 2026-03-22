@@ -1,39 +1,42 @@
 class MinStack {
-    long long mn;
-    std::vector<long long> st;
-
 public:
-      MinStack() {}
-
-       void push(int val) {
-        if (st.empty()) {
-
-            mn = val;
-            st.push_back(0);
-
-        } else {
-            long long diff = val - mn;
-            st.push_back(diff);
-            if (diff < 0) mn = val;
-        }
-    }
-
-
-
-    void pop()  {
-        long long diff = st.back();
-        st.pop_back();
-           if (diff < 0) mn -= diff;
-    }
-
-    int top() {
-
+    stack<pair<int, int>> s;
+    MinStack() {
         
-        long long diff = st.back();
-        return diff < 0 ? mn : mn + diff;
     }
-
+    
+    void push(int val) {
+        if(s.empty()) {
+            s.push({val, val});
+        } else {
+            int minVal = min(val, s.top().second);
+            s.push({val, minVal});
+        }
+        
+    }
+    
+    void pop() {
+        s.pop();
+        
+    }
+    
+    int top() {
+        return s.top().first;
+        
+    }
+    
     int getMin() {
-        return mn;
+
+        return s.top().second;
+        
     }
 };
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack* obj = new MinStack();
+ * obj->push(val);
+ * obj->pop();
+ * int param_3 = obj->top();
+ * int param_4 = obj->getMin();
+ */
